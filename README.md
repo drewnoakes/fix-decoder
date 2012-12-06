@@ -1,7 +1,9 @@
 FIX Decoder
 ===========
 
-Visit the [live site](http://drewnoakes.com/fix-decoder/).
+Visit the live site at [http://drewnoakes.com/fix-decoder/](http://drewnoakes.com/fix-decoder/).
+
+![Screenshot of FIX Decoder](/img/fix-decoder-screen-shot.png "A screen shot showing FIX Decoder in action")
 
 A convenient and powerful decoder for FIX messages.
 
