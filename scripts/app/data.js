@@ -4,6 +4,7 @@ define(
     function()
     {
         return {
+            systemFieldIds: [10],
             fieldById: {
                 "1": {
                     "name": "Account",
@@ -46,11 +47,15 @@ define(
                 },
                 "8": {
                     "name": "BeginString",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true,
+                    "isRequired": true
                 },
                 "9": {
                     "name": "BodyLength",
-                    "type": "LENGTH"
+                    "type": "LENGTH",
+                    "isHeaderField": true,
+                    "isRequired": true
                 },
                 "10": {
                     "name": "CheckSum",
@@ -235,11 +240,15 @@ define(
                 },
                 "34": {
                     "name": "MsgSeqNum",
-                    "type": "SEQNUM"
+                    "type": "SEQNUM",
+                    "isHeaderField": true,
+                    "isRequired": true
                 },
                 "35": {
                     "name": "MsgType",
                     "type": "STRING",
+                    "isHeaderField": true,
+                    "isRequired": true,
                     "values": {
                         "0": "Heartbeat",
                         "1": "Test Request",
@@ -408,7 +417,8 @@ define(
                 },
                 "43": {
                     "name": "PossDupFlag",
-                    "type": "BOOLEAN"
+                    "type": "BOOLEAN",
+                    "isHeaderField": true
                 },
                 "44": {
                     "name": "Price",
@@ -424,15 +434,20 @@ define(
                 },
                 "49": {
                     "name": "SenderCompID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isRequired": true,
+                    "isHeaderField": true
                 },
                 "50": {
                     "name": "SenderSubID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "52": {
                     "name": "SendingTime",
-                    "type": "UTCTIMESTAMP"
+                    "type": "UTCTIMESTAMP",
+                    "isHeaderField": true,
+                    "isRequired": true
                 },
                 "53": {
                     "name": "Quantity",
@@ -466,11 +481,14 @@ define(
                 },
                 "56": {
                     "name": "TargetCompID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isRequired": true,
+                    "isHeaderField": true
                 },
                 "57": {
                     "name": "TargetSubID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "58": {
                     "name": "Text",
@@ -673,11 +691,13 @@ define(
                 },
                 "90": {
                     "name": "SecureDataLen",
-                    "type": "LENGTH"
+                    "type": "LENGTH",
+                    "isHeaderField": true
                 },
                 "91": {
                     "name": "SecureData",
-                    "type": "DATA"
+                    "type": "DATA",
+                    "isHeaderField": true
                 },
                 "93": {
                     "name": "SignatureLength",
@@ -702,7 +722,8 @@ define(
                 },
                 "97": {
                     "name": "PossResend",
-                    "type": "BOOLEAN"
+                    "type": "BOOLEAN",
+                    "isHeaderField": true
                 },
                 "98": {
                     "name": "EncryptMethod",
@@ -824,11 +845,13 @@ define(
                 },
                 "115": {
                     "name": "OnBehalfOfCompID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "116": {
                     "name": "OnBehalfOfSubID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "117": {
                     "name": "QuoteID",
@@ -852,7 +875,8 @@ define(
                 },
                 "122": {
                     "name": "OrigSendingTime",
-                    "type": "UTCTIMESTAMP"
+                    "type": "UTCTIMESTAMP",
+                    "isHeaderField": true
                 },
                 "123": {
                     "name": "GapFillFlag",
@@ -881,11 +905,13 @@ define(
                 },
                 "128": {
                     "name": "DeliverToCompID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "129": {
                     "name": "DeliverToSubID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "130": {
                     "name": "IOINaturalFlag",
@@ -948,19 +974,23 @@ define(
                 },
                 "142": {
                     "name": "SenderLocationID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "143": {
                     "name": "TargetLocationID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "144": {
                     "name": "OnBehalfOfLocationID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "145": {
                     "name": "DeliverToLocationID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "146": {
                     "name": "NoRelatedSym",
@@ -1316,11 +1346,13 @@ define(
                 },
                 "212": {
                     "name": "XmlDataLen",
-                    "type": "LENGTH"
+                    "type": "LENGTH",
+                    "isHeaderField": true
                 },
                 "213": {
                     "name": "XmlData",
-                    "type": "DATA"
+                    "type": "DATA",
+                    "isHeaderField": true
                 },
                 "214": {
                     "name": "SettlInstRefID",
@@ -2188,6 +2220,7 @@ define(
                 "347": {
                     "name": "MessageEncoding",
                     "type": "STRING",
+                    "isHeaderField": true,
                     "values": {
                         "ISO-2022-JP": "ISO_2022_JP",
                         "EUC-JP": "EUC_JP",
@@ -2292,7 +2325,14 @@ define(
                 },
                 "369": {
                     "name": "LastMsgSeqNumProcessed",
-                    "type": "SEQNUM"
+                    "type": "SEQNUM",
+                    "isHeaderField": true
+                },
+                "370": {
+                    "name": "OnBehalfOfSendingTime",
+                    "type": "SEQNUM",
+                    "isHeaderField": true,
+                    "deprecatedSince": 4.3
                 },
                 "371": {
                     "name": "RefTagID",
@@ -3855,19 +3895,23 @@ define(
                 },
                 "627": {
                     "name": "NoHops",
-                    "type": "NUMINGROUP"
+                    "type": "NUMINGROUP",
+                    "isHeaderField": true
                 },
                 "628": {
                     "name": "HopCompID",
-                    "type": "STRING"
+                    "type": "STRING",
+                    "isHeaderField": true
                 },
                 "629": {
                     "name": "HopSendingTime",
-                    "type": "UTCTIMESTAMP"
+                    "type": "UTCTIMESTAMP",
+                    "isHeaderField": true
                 },
                 "630": {
                     "name": "HopRefID",
-                    "type": "SEQNUM"
+                    "type": "SEQNUM",
+                    "isHeaderField": true
                 },
                 "631": {
                     "name": "MidPx",

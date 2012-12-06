@@ -1,9 +1,12 @@
 define(
     [
-        'FixParser'
+        'FixParser',
+        'Base64'
     ],
-    function(FixParser)
+    function(FixParser, Base64)
     {
+        var MAX_HASH_LENGTH = 1024 * 10;
+
         var getCSSRule = function(ruleName, deleteFlag)
         {
             ruleName = ruleName.toLowerCase();
@@ -42,28 +45,58 @@ define(
 
         var parser = new FixParser(),
             resultTemplateText = $('#result-template').html(),
-            resultTemplate = Handlebars.compile(resultTemplateText);
+            resultTemplate = Handlebars.compile(resultTemplateText),
+            input = $('#fix-message-input');
 
-        var input = $('#fix-message-input');
-
-        var parseText = function()
+        // Listen for changes in the textbox
+        input.bind('input propertychange', function()
         {
-            var messageText = input.val(),
-                messages = parser.parse(messageText);
+            var messageText = input.val();
+            parseText(messageText);
+            var encoded = Base64.encode(messageText);
+            if (encoded) {
+                var hash = 'base64:' + encoded;
+                window.location.hash = hash.length < MAX_HASH_LENGTH ? hash : null;
+            } else {
+                window.location.hash = '';
+            }
+        });
 
-            $('#fix-message-output-container').html(resultTemplate(messages));
+        var decodeHash = function()
+        {
+            if (document.location.hash.length > 1)
+                return Base64.decode(document.location.hash.substr("#base64:".length));
+            return null;
         };
 
-        input.bind('input propertychange', parseText);
+        var parseText = function(messageText)
+        {
+            var messages = parser.parse(messageText);
+            var resultsHtml = resultTemplate(messages);
+            $('#fix-message-output-container').html(resultsHtml);
+        };
 
-        parseText();
+        var decoded = decodeHash();
+        if (decoded) {
+            parseText(decoded);
+            input.val(decoded);
+        } else {
+            parseText(input.val());
+        }
+
+        window.onpopstate = function(event)
+        {
+            var messageText = decodeHash();
+            parseText(messageText);
+            input.val(messageText);
+        };
 
         // Support the 'show data type' option
         var dataTypeCssRule = getCSSRule('td.data-type');
         $('#show-data-type').change(function()
         {
             var checked = $(this).is(':checked');
-            dataTypeCssRule.style.display = checked ? 'inherit' : 'none';
-        })
+            dataTypeCssRule.style.display = checked ? 'table-cell' : 'none';
+        });
     }
 );

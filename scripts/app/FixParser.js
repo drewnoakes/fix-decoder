@@ -8,10 +8,12 @@ define(
             BEGIN_STRING = 8,
             MSG_TYPE = 35;
 
-        var systemFieldIds = [8, 9, 10, 35, 34, 49, 52, 56];
-
         var FixParser = function()
         {};
+
+        var parseVersionFromBeginString = function(beginStr) {
+            return parseFloat(beginStr.substr("FIX.".length));
+        };
 
         FixParser.prototype.parse = function(str)
         {
@@ -19,18 +21,39 @@ define(
             var regex = /([0-9]+)=([^|\001]*)/g,
                 fields = [], result;
 
+            var fixVersion = 'unknown';
+
             while (result = regex.exec(str)) {
                 var fieldId = parseInt(result[1]),
                     value = result[2],
                     field = data.fieldById[fieldId],
                     decodedValue = field && field.values ? field.values[value] : null;
 
+                if (fieldId === BEGIN_STRING) {
+                    fixVersion = parseVersionFromBeginString(value);
+                }
+
+                var classes = [];
+
+                if (_.contains(data.systemFieldIds, fieldId)) {
+                    classes.push("system-field");
+                }
+                if (field.isRequired) {
+                    classes.push("required-field");
+                }
+                if (field.deprecatedSince <= fixVersion) {
+                    classes.push("deprecated-field");
+                }
+                if (field.isHeaderField) {
+                    classes.push("header-field");
+                }
+
                 fields.push({
-                    fieldId:fieldId,
-                    value:value,
-                    field:field,
-                    decodedValue:decodedValue,
-                    isSystemField:_.contains(systemFieldIds, fieldId)
+                    fieldId: fieldId,
+                    value: value,
+                    field: field,
+                    decodedValue: decodedValue,
+                    classes: classes.join(' ')
                 });
             }
 

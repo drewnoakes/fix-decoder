@@ -110,7 +110,17 @@ thead
 
 tr.system-field
 {
-    color: #888;
+    color: #aaa;
+}
+
+tr.deprecated-field td.field-name
+{
+    text-decoration: line-through;
+}
+
+tr.header-field
+{
+    color: #777;
 }
 
 td.field-id
