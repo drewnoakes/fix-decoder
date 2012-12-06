@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>Online FIX Message Decoder</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+    <link rel="stylesheet" href="styles/styles.css" type="text/css">
+
+    <script id="result-template" type="text/x-handlebars-template">
+        {{#each this}}
+        <table>
+            <thead>
+            <tr>
+                <td>Field</td>
+                <td>Field Name</td>
+                <td>Data Type</td>
+                <td>Value</td>
+                <td>Decoded Value</td>
+            </tr>
+            </thead>
+            {{#each this}}
+            <tr>
+                <td>{{this.fieldId}}</td>
+                <td>{{this.field.name}}</td>
+                <td>{{this.field.type}}</td>
+                <td>{{this.value}}</td>
+                <td>{{this.decodedValue}}</td>
+            </tr>
+            {{/each}}
+        </table>
+        {{/each}}
+    </script>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-936661-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+
+<body>
+
+    <div id="fix-message-input-container">
+        <textarea id="fix-message-input"><20121205-22:47:27, FIX.4.2:SOLO->LSEHub, outgoing> (8=FIX.4.29=18835=AE34=1549=SOLO52=20121205-22:47:27.09256=LSEHub22=431=157.832=1043=N48=GB00B16GWD5660=20121205-22:47:27.07064=20121205128=LSETR150=0570=N571=TRADE_ID_46757828=0918=GBX10=216)</textarea>
+    </div>
+
+    <div id="fix-message-output-container"></div>
+
+    <div id="footer">
+        <div id="disclaimer">all processing occurs in the browser &mdash; your data is never sent to anyone</div>
+        <div id="copyright">&copy; drew noakes 2012 &mdash; all rights reserved &mdash; no warranties expressed or implied</div>
+    </div>
+
+    <script type="text/javascript" src="scripts/lib/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="scripts/lib/require.2.1.0.js" data-main="scripts/app/main"></script>
+    <script type="text/javascript" src="scripts/lib/underscore.1.4.2.js"></script>
+    <script type="text/javascript" src="scripts/lib/handlebars-1.0.rc.1.js"></script>
+
+    <script type="text/javascript">
+        require.config({
+            urlArgs: 'noCache=' + new Date().getTime()
+        });
+    </script>
+</body>
+
+</html>
