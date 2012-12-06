@@ -5,12 +5,13 @@ define(
     function(data)
     {
         var FIELD_CHECKSUM = 10,
-            BEGIN_STRING = 8;
+            BEGIN_STRING = 8,
+            MSG_TYPE = 35;
+
+        var systemFieldIds = [8, 9, 10, 35, 34, 49, 52, 56];
 
         var FixParser = function()
-        {
-
-        };
+        {};
 
         FixParser.prototype.parse = function(str)
         {
@@ -28,7 +29,8 @@ define(
                     fieldId:fieldId,
                     value:value,
                     field:field,
-                    decodedValue:decodedValue
+                    decodedValue:decodedValue,
+                    isSystemField:_.contains(systemFieldIds, fieldId)
                 });
             }
 
@@ -36,6 +38,13 @@ define(
             var message = undefined,
                 messages = [],
                 hasActiveMessage = false;
+
+            var createMessage = function()
+            {
+                message = {fields:[]};
+                messages.push(message);
+                hasActiveMessage = true;
+            };
 
             _.each(
                 fields,
@@ -46,27 +55,29 @@ define(
                     switch (field.fieldId) {
                         case FIELD_CHECKSUM:
                             if (hasActiveMessage) {
-                                message.push(field);
+                                message.fields.push(field);
                                 hasActiveMessage = false;
                                 message = undefined;
                                 processed = true;
                             }
                             break;
                         case BEGIN_STRING:
-                            message = [];
-                            messages.push(message);
-                            hasActiveMessage = true;
+                            createMessage();
+                            break;
+                        case MSG_TYPE:
+                            if (!hasActiveMessage) {
+                                createMessage();
+                            }
+                            message.type = field.decodedValue || 'Unknown Message Type';
                             break;
                     }
 
                     if (!processed) {
                         if (!hasActiveMessage) {
-                            message = [];
-                            messages.push(message);
-                            hasActiveMessage = true;
+                            createMessage();
                         }
 
-                        message.push(field);
+                        message.fields.push(field);
                     }
                 }
             );

@@ -48,23 +48,103 @@ table {
 
 /***************************************************************************/
 
+html
+{
+    font-family: "Trebuchet MS", Helvetica, sans-serif
+}
+
+body
+{
+    background: rgba(0,0,0,0.4);
+    margin: 16px;
+}
+
+textarea
+{
+    box-sizing: border-box;
+}
+
+/***************************************************************************/
+
 #fix-message-input
 {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
     width: 100%;
-    height: 60px;
+    max-width: 100%;
+    height: 100px;
+    border-width: 0;
+    border-radius: 6px;
+    resize: vertical;
+    padding: 16px;
 }
 
 #footer
 {
-    margin-top: 40px;
+    text-align: center;
+    margin: 40px 0;
     font-family: consolas, monospace;
     font-size: 12px;
     font-weight: bold;
+    line-height: 2em;
+}
+
+#options
+{
+    margin-top: 16px;
 }
 
 thead
 {
     font-weight: bold;
+}
+
+tr.system-field
+{
+    color: #888;
+}
+
+td.field-id
+{
+    text-align: right;
+}
+
+td.field-value
+{
+    font-family: consolas, monospace;
+}
+
+td.field-value span.encoded-value
+{
+    color: #888;
+}
+
+td.data-type
+{
+    display: none;
+}
+
+/***************************************************************************/
+
+div.message
+{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 32px;
+    background: #fff;
+    margin-top: 16px;
+}
+
+div.message h1
+{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+div.message table
+{
+    border-spacing: 13px 3px;
+    border-collapse: separate;
 }
 
 /***************************************************************************/

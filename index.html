@@ -13,26 +13,35 @@
 
     <script id="result-template" type="text/x-handlebars-template">
         {{#each this}}
-        <table>
-            <thead>
-            <tr>
-                <td>Field</td>
-                <td>Field Name</td>
-                <td>Data Type</td>
-                <td>Value</td>
-                <td>Decoded Value</td>
-            </tr>
-            </thead>
-            {{#each this}}
-            <tr>
-                <td>{{this.fieldId}}</td>
-                <td>{{this.field.name}}</td>
-                <td>{{this.field.type}}</td>
-                <td>{{this.value}}</td>
-                <td>{{this.decodedValue}}</td>
-            </tr>
-            {{/each}}
-        </table>
+        <div class="message">
+            <h1>{{this.type}}</h1>
+            <table>
+                <thead>
+                <tr>
+                    <td>Field</td>
+                    <td>Field Name</td>
+                    <td class="data-type">Data Type</td>
+                    <td>Value</td>
+                </tr>
+                </thead>
+                {{#each this.fields}}
+                {{#if this.isSystemField}}
+                <tr class="system-field">
+                {{else}}
+                <tr>
+                {{/if}}
+                    <td class="field-id">{{this.fieldId}}</td>
+                    <td class="field-name">{{this.field.name}}</td>
+                    <td class="field-type data-type">{{this.field.type}}</td>
+                    {{#if this.decodedValue}}
+                    <td class="field-value">{{this.decodedValue}} <span class="encoded-value">({{this.value}})</span></td>
+                    {{else}}
+                    <td class="field-value">{{this.value}}</td>
+                    {{/if}}
+                </tr>
+                {{/each}}
+            </table>
+        </div>
         {{/each}}
     </script>
 
@@ -52,10 +61,16 @@
 <body>
 
     <div id="fix-message-input-container">
-        <textarea id="fix-message-input"><20121205-22:47:27, FIX.4.2:MyComp->YourComp, outgoing> (8=FIX.4.29=18835=AE34=1549=MyComp52=20121205-22:47:27.09256=YourComp22=431=157.832=1043=N48=GB00B16GWD5660=20121205-22:47:27.07064=20121205150=0570=N571=TRADE_ID_46757828=0918=GBX10=216)</textarea>
+        <textarea spellcheck="false" id="fix-message-input"><20121205-22:47:27, FIX.4.2:MyComp->YourComp, outgoing> (8=FIX.4.29=18835=AE34=1549=MyComp52=20121205-22:47:27.09256=YourComp22=431=157.832=1043=N48=GB00B16GWD5660=20121205-22:47:27.07064=20121205150=0570=N571=TRADE_ID_46757828=0918=GBX10=216)</textarea>
     </div>
 
     <div id="fix-message-output-container"></div>
+
+    <div id="options">
+        <input type="checkbox" id="show-data-type" />
+        <label for="show-data-type">Show data types</label>
+    </div>
+
 
     <div id="footer">
         <div id="disclaimer">all processing occurs in the browser &mdash; your data is never sent to anyone</div>
