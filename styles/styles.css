@@ -88,6 +88,16 @@ textarea
     line-height: 2em;
 }
 
+#footer a
+{
+    color: #000;
+}
+
+#footer img
+{
+    margin-bottom: -4px;
+}
+
 #options
 {
     margin-top: 16px;
