@@ -38,14 +38,17 @@ define(
                 if (_.contains(data.systemFieldIds, fieldId)) {
                     classes.push("system-field");
                 }
-                if (field.isRequired) {
-                    classes.push("required-field");
-                }
-                if (field.deprecatedSince <= fixVersion) {
-                    classes.push("deprecated-field");
-                }
-                if (field.isHeaderField) {
-                    classes.push("header-field");
+
+                if (field) {
+                    if (field.isRequired) {
+                        classes.push("required-field");
+                    }
+                    if (field.deprecatedSince <= fixVersion) {
+                        classes.push("deprecated-field");
+                    }
+                    if (field.isHeaderField) {
+                        classes.push("header-field");
+                    }
                 }
 
                 fields.push({
