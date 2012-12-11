@@ -63,7 +63,7 @@ textarea
 {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
-    font-family: consolas, monospace;
+    font-family: consolas, courier new, monospace;
 }
 
 /***************************************************************************/
@@ -90,7 +90,7 @@ textarea
 #footer, #clear, #samples a, #options
 {
     color: #000;
-    font-family: consolas, monospace;
+    font-family: consolas, courier new, monospace;
     font-size: 12px;
     font-weight: bold;
 }
@@ -137,7 +137,7 @@ td.field-id
 
 td.field-value
 {
-    font-family: consolas, monospace;
+    font-family: consolas, courier new, monospace;
 }
 
 td.field-value span.encoded-value
