@@ -18,7 +18,7 @@ define(
         FixParser.prototype.parse = function(str)
         {
             // Create a sequence of fields
-            var regex = /([0-9]+)=([^|\001]*)/g,
+            var regex = /([0-9]+)=([^|;\001]*)/g,
                 fields = [], result;
 
             var fixVersion = 'unknown';
