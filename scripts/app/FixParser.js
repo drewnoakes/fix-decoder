@@ -89,6 +89,7 @@ define(
                             break;
                         case BEGIN_STRING:
                             createMessage();
+							message.fixVersion = field.value.replace("FIX.", "");
                             break;
                         case MSG_TYPE:
                             if (!hasActiveMessage) {
