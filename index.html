@@ -28,7 +28,7 @@
                 </thead>
                 {{#each this.fields}}
                 <tr class="{{this.classes}}">
-                <td class="field-id">{{this.fieldId}}</td>
+                <td class="field-id"><a href="http://www.onixs.biz/fix-dictionary/{{../fixVersion}}/tagNum_{{this.fieldId}}.html" target="_blank">{{this.fieldId}}</a></td>
                     <td class="field-name">{{this.field.name}}</td>
                     <td class="field-type data-type">{{this.field.type}}</td>
                     {{#if this.decodedValue}}
