@@ -135,6 +135,22 @@ td.field-id
     text-align: right;
 }
 
+td.field-id a
+{
+    color: #028;
+    text-decoration: none;
+}
+
+td.field-id a:hover
+{
+    text-decoration: underline;
+}
+
+td.field-id a:visited
+{
+    color: inherit;
+}
+
 td.field-value
 {
     font-family: consolas, courier new, monospace;
