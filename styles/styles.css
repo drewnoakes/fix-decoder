@@ -176,6 +176,7 @@ div.message
     padding: 32px;
     background: #fff;
     margin-top: 16px;
+    background: #F0F2EB;
 }
 
 div.message h1
@@ -183,6 +184,7 @@ div.message h1
     font-size: 1.5em;
     font-weight: bold;
     margin-bottom: 1em;
+    color: #45484B;
 }
 
 div.message table
