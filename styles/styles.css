@@ -51,11 +51,11 @@ table {
 html
 {
     font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+    background: #888;
 }
 
 body
 {
-    background: rgba(0,0,0,0.4);
     margin: 16px;
 }
 
