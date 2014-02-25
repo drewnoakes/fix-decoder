@@ -6,7 +6,9 @@ define(
     {
         var FIELD_CHECKSUM = 10,
             BEGIN_STRING = 8,
-            MSG_TYPE = 35;
+            MSG_TYPE = 35,
+            SENDER_COMP_ID = 49,
+            TARGET_COMP_ID = 56;
 
         var FixParser = function()
         {};
@@ -96,6 +98,12 @@ define(
                                 createMessage();
                             }
                             message.type = field.decodedValue || 'Unknown Message Type';
+                            break;
+                        case SENDER_COMP_ID:
+                            message.senderCompId = field.value;
+                            break;
+                        case TARGET_COMP_ID:
+                            message.targetCompId = field.value;
                             break;
                     }
 

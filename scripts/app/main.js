@@ -86,7 +86,25 @@ define(
 
         var parseText = function(messageText)
         {
-            var messages = parser.parse(messageText);
+            var messages = parser.parse(messageText),
+                compIds = {};
+
+            // Go through messages and track the sender/targets.
+            _.each(messages, function(msg)
+            {
+                compIds[msg.senderCompId] = true;
+                compIds[msg.targetCompId] = true;
+            });
+
+            if (_.keys(compIds).length === 2)
+            {
+                // If this exchange is between exactly two parties, then set them to left/right
+                var leftCompId = messages[0].senderCompId;
+                _.each(messages, function(msg)
+                {
+                    msg.side = msg.senderCompId === leftCompId ? 'left' : 'right';
+                });
+            }
             var resultsHtml = resultTemplate(messages);
             $('#fix-message-output-container').html(resultsHtml);
         };

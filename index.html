@@ -13,7 +13,7 @@
 
     <script id="result-template" type="text/x-handlebars-template">
         {{#each this}}
-        <div class="message">
+        <div class="message side-{{this.side}}">
             {{#if this.type}}
             <h1>{{this.type}}</h1>
             {{/if}}

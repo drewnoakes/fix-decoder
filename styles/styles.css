@@ -190,6 +190,13 @@ div.message table
 {
     border-spacing: 13px 3px;
     border-collapse: separate;
+    display: inline-block;
+    text-align: left;
+}
+
+div.message.side-right
+{
+    text-align: right;
 }
 
 /***************************************************************************/
