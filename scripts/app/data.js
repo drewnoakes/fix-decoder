@@ -148,6 +148,16 @@ define(
                     "name": "ExecRefID",
                     "type": "STRING"
                 },
+                "20": {
+                    "name": "ExecTransType",
+                    "type": "CHAR",
+                    "values": {
+                        "0": "New",
+                        "1": "Cancel",
+                        "2": "Correct",
+                        "3": "Status"
+                    }
+                },
                 "21": {
                     "name": "HandlInst",
                     "type": "CHAR",
