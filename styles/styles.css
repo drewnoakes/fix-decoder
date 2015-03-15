@@ -120,6 +120,16 @@ tr.system-field
     color: #aaa;
 }
 
+tr.header-field.valid .field-value
+{
+    color: #0c0;
+}
+
+tr.header-field.invalid .field-value
+{
+    color: #f00;
+}
+
 tr.deprecated-field td.field-name
 {
     text-decoration: line-through;
