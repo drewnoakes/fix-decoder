@@ -160,6 +160,47 @@ define(
                 }
             );
 
+            // Checksum(10) verification
+            _.each(
+                messages,
+                function(message)
+                {
+                    var field_checksum = undefined;
+                    sum = 0;
+
+                    _.each(
+                        message.fields,
+                        function(field)
+                        {
+                            if ( field.fieldId == FIELD_CHECKSUM ) {
+                                field_checksum = field;
+                                return;
+                            }
+
+                            for ( var i = 0 ; i < field.raw.length ; i++ ) {
+                                sum += field.raw.charCodeAt(i);
+                            }
+                        }
+                    );
+
+                    // Modulo 256 + pad up to 3 characters with zero
+                    sum = ("00" + (sum % 256)).slice(-3);
+
+                    if ( ! field_checksum ) {
+                        return;
+                    }
+
+                    if ( field_checksum.value == sum ) {
+                        field_checksum.classes += ' valid';
+                        field_checksum.decodedValue = 'Valid';
+                    }
+                    else {
+                        field_checksum.classes += ' invalid';
+                        field_checksum.decodedValue = '/!\\ Invalid (expected ' + sum + ')';
+                    }
+                }
+            );
+
             return messages;
         };
 

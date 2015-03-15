@@ -120,11 +120,13 @@ tr.system-field
     color: #aaa;
 }
 
+tr.system-field.valid .field-value,
 tr.header-field.valid .field-value
 {
     color: #0c0;
 }
 
+tr.system-field.invalid .field-value,
 tr.header-field.invalid .field-value
 {
     color: #f00;
