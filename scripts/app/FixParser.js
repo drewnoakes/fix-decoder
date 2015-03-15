@@ -6,6 +6,7 @@ define(
     {
         var FIELD_CHECKSUM = 10,
             BEGIN_STRING = 8,
+            BODY_LENGTH = 9,
             MSG_TYPE = 35,
             SENDER_COMP_ID = 49,
             TARGET_COMP_ID = 56;
@@ -57,6 +58,7 @@ define(
                     fieldId: fieldId,
                     value: value,
                     field: field,
+                    raw: fieldId + "=" + value + "\01",
                     decodedValue: decodedValue,
                     classes: classes.join(' ')
                 });
@@ -113,6 +115,88 @@ define(
                         }
 
                         message.fields.push(field);
+                    }
+                }
+            );
+
+            // BodyLength(9) verification
+            _.each(
+                messages,
+                function(message)
+                {
+                    var field_bodylength = undefined;
+                    length = 0;
+
+                    _.each(
+                        message.fields,
+                        function(field)
+                        {
+                            if ( field.fieldId == BODY_LENGTH ) {
+                                field_bodylength = field;
+                                return;
+                            }
+
+                            // Some fields are not part of the FIX message body, skip them
+                            if ( field.fieldId == BEGIN_STRING || field.fieldId == FIELD_CHECKSUM ) {
+                                return;
+                            }
+
+                            length += field.raw.length;
+                        }
+                    );
+
+                    if ( ! field_bodylength ) {
+                        return;
+                    }
+
+                    if ( field_bodylength.value == length ) {
+                        field_bodylength.classes += ' valid';
+                        field_bodylength.decodedValue = 'Valid';
+                    }
+                    else {
+                        field_bodylength.classes += ' invalid';
+                        field_bodylength.decodedValue = '/!\\ Invalid (expected ' + length + ')';
+                    }
+                }
+            );
+
+            // Checksum(10) verification
+            _.each(
+                messages,
+                function(message)
+                {
+                    var field_checksum = undefined;
+                    sum = 0;
+
+                    _.each(
+                        message.fields,
+                        function(field)
+                        {
+                            if ( field.fieldId == FIELD_CHECKSUM ) {
+                                field_checksum = field;
+                                return;
+                            }
+
+                            for ( var i = 0 ; i < field.raw.length ; i++ ) {
+                                sum += field.raw.charCodeAt(i);
+                            }
+                        }
+                    );
+
+                    // Modulo 256 + pad up to 3 characters with zero
+                    sum = ("00" + (sum % 256)).slice(-3);
+
+                    if ( ! field_checksum ) {
+                        return;
+                    }
+
+                    if ( field_checksum.value == sum ) {
+                        field_checksum.classes += ' valid';
+                        field_checksum.decodedValue = 'Valid';
+                    }
+                    else {
+                        field_checksum.classes += ' invalid';
+                        field_checksum.decodedValue = '/!\\ Invalid (expected ' + sum + ')';
                     }
                 }
             );
