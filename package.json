@@ -11,5 +11,11 @@
     "jquery": "2.1.0",
     "lodash": "2.4.1",
     "requirejs": "2.1.11"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.1.2",
   }
 }
