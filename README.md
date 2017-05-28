@@ -24,6 +24,23 @@ Also the non-printable `SOH` character (`\001`) is handled correctly.
 
 Using pipe characters (`|`) as separators is also supported.
 
+How to build
+============
+
+In order to build this project, you need to have 2 tools installed on your computer: yarn (package manager), and gulp (build system). Please find below the link to their respective documentation:
+* [Yarn installation documentation](https://yarnpkg.com/lang/en/docs/install/)
+* [Gulp Getting Started wiki page](https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md)
+
+To download the dependancies, run on the repository's folder:
+
+> yarn install
+
+Then to build the project, just type:
+
+> gulp
+
+The files will be copied on the 'dist' directory.
+
 License
 =======
 
