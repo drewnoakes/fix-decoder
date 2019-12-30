@@ -13,7 +13,7 @@
     "requirejs": "2.1.11"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-rename": "^1.2.2",
     "gulp-uglify": "^2.1.2"
   }
