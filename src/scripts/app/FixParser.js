@@ -38,7 +38,7 @@ define(
 
                 var classes = [];
 
-                if (_.contains(data.systemFieldIds, fieldId)) {
+                if (_.includes(data.systemFieldIds, fieldId)) {
                     classes.push("system-field");
                 }
 

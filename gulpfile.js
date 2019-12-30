@@ -16,7 +16,7 @@ gulp.task('lib', function() {
 	return gulp.src(
 		[
 			'node_modules/jquery/dist/jquery.min.js',
-			'node_modules/lodash/dist/lodash.min.js',
+			'node_modules/lodash/lodash.min.js',
 			'node_modules/handlebars/dist/handlebars.min.js'
 		])
         .pipe(gulp.dest('dist/scripts/lib'))
