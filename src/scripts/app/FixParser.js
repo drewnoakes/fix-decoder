@@ -18,15 +18,31 @@ define(
             return parseFloat(beginStr.substr("FIX.".length));
         };
 
+        var splitFields = function(str) {
+            var result = str.match(/[^0-9a-zA-Z:\s]*8=FIX(?:[^=]{0,20}?)\D9=\d+(?<delim>.*?\D)35=/);
+            if (result !== null) {
+                return str.split(result.groups.delim);
+            } else
+            {
+                return str.split(/\||;|\x001|\[SOH\]|<SOH>|\^A/);
+            }
+        };
+
         FixParser.prototype.parse = function(str)
         {
             // Create a sequence of fields
-            var regex = /([0-9]+)=([^|;\001]*)/g,
+            var regex = /([0-9]+)=(.*)/,
                 fields = [], result;
 
             var fixVersion = 'unknown';
 
-            while (result = regex.exec(str)) {
+            var splits = splitFields(str);
+            for (var i=0; i<splits.length; ++i) {
+                // cut the fields by separators before extracting field id and value
+                result = splits[i].match(regex);
+                if (!result)
+                    continue;
+
                 var fieldId = parseInt(result[1]),
                     value = result[2],
                     field = data.fieldById[fieldId],
